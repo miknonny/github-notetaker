@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gaearon/react-hot-boilerplate.git"
+    "url": "https://github.com/miknonny/github-notetaker.git"
   },
   "keywords": [
     "react",
@@ -21,7 +21,7 @@
     "edit",
     "webpack"
   ],
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+  "author": "mbah michael miknonny@gmailcom ",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/gaearon/react-hot-boilerplate/issues"
@@ -40,7 +40,9 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
+    "history": "^1.17.0",
     "react": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "react-dom": "^0.14.0",
+    "react-router": "^1.0.3"
   }
 }
