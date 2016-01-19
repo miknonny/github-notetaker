@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
-class Home extends Component {
+export default class Home extends Component {
   render () {
     return (
-      <h2>Home here.</h2>
+      <h2 className="text-center">
+        Search by Github Username Above
+      </h2>
     )
   }
 }
