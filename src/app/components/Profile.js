@@ -1,20 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Router } from 'react-router'
 import Repos from './Github/Repos'
 import UserProfile from './Github/UserProfile'
 import Notes from './Notes/Notes'
+import { ReactFireMixin } from 'reactfire'
 
-export default class Profile extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
+export const Profile = React.createClass({
+  getInitialState () {
+    return {
       notes: [1, 2, 3],
       bio: {
         name: 'Mbah Michael'
       },
       repos: ['a', 'b', 'c']
     }
-  }
+  },
   render () {
     return (
       <div className="row">
@@ -30,4 +30,4 @@ export default class Profile extends Component {
       </div>
     )
   }
-}
+})
