@@ -4,8 +4,6 @@ import  { Router, Route } from 'react-router'
 import { routes } from './config/routes'
 import Main from './components/Main'
 
-console.log(routes);
-
 ReactDOM.render(
   <Router>
     {routes}
