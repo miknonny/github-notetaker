@@ -5,6 +5,7 @@ import UserProfile from './Github/UserProfile'
 import Notes from './Notes/Notes'
 import ReactFireMixin from 'reactfire'
 import Firebase from 'firebase'
+import { helpers } from '../utils/helpers'
 
 export const Profile = React.createClass({
   // Takes the 'this' keyword of your class. and adds a few reactfire methods on it.
@@ -12,10 +13,8 @@ export const Profile = React.createClass({
   getInitialState () {
     return {
       notes: [1, 2, 3],
-      bio: {
-        name: 'Mbah Michael'
-      },
-      repos: ['a', 'b', 'c']
+      bio: {},
+      repos: []
     }
   },
 
@@ -25,6 +24,15 @@ export const Profile = React.createClass({
     let childRef = this.ref.child(this.props.params.username)
     // this binds firebase to the notes array in state
     this.bindAsArray(childRef, 'notes')
+
+    helpers.getGithubInfo(this.props.params.username)
+      .then((data) => {
+        // debugger
+        this.setState({
+          bio: data.bio,
+          repos: data.repos
+        })
+      })
   },
 
   // this will remove connection to firebase once component is not active.

@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react'
 
 export default class UserProfile extends Component {
   render () {
+    console.log('BIO: ', this.props.bio)
     return (
       <div>
         <p>USER PROFILE</p>
         <p>Username: {this.props.username}</p>
-        <p>Bio: {this.props.bio.name}</p>
       </div>
     )
   }

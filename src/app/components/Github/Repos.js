@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react'
 
 export default class Repos extends Component {
   render () {
+    console.log('REPO: ', this.props.repos)
     return (
       <div>
         <p>REPOS</p>
         <p>username: {this.props.username}</p>
-        <p>{this.props.repos}</p>
       </div>
     )
   }
