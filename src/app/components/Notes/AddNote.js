@@ -1,15 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 
 export default class AddNote extends Component {
-
   handleSubmit () {
-    // debugger;
     let newNote = this.refs.input.value
     this.props.addNote(newNote)
     this.refs.input.value = '';
   }
   render () {
-    // debugger;
     return (
       <div className="input-group">
         <input type="text"

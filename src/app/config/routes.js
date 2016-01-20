@@ -7,8 +7,7 @@ import { Profile } from '../components/Profile'
 
 export const routes = (
   <Route path="/" component={Main}>
-    <Route path="/profile/:username" component={Profile} />
+    <Route path="profile/:username" component={Profile} />
     <IndexRoute component={Home} />
   </Route>
-
 )
