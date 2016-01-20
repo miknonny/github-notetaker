@@ -32,6 +32,15 @@ export const Profile = React.createClass({
     this.unbind('notes')
   },
 
+  // manippulate that state where it leaves and pass down
+  // the function to the child compnent that requires it.
+  handleAddNote (newNote) {
+
+    // firebaseapp/username/noOfItems/setItemhere
+    this.ref.child(this.props.params.username).child(this.state.notes.length)
+      .set(newNote)
+  },
+
   render () {
     return (
       <div className="row">
@@ -45,7 +54,8 @@ export const Profile = React.createClass({
         </div>
         <div className="col-md-4">
           <Notes username={this.props.params.username}
-            notes={this.state.notes} />
+            notes={this.state.notes}
+            addNote={this.handleAddNote} />
         </div>
       </div>
     )
