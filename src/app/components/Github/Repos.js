@@ -5,6 +5,7 @@ export default class Repos extends Component {
     return (
       <div>
         <p>REPOS</p>
+        <p>username: {this.props.username}</p>
         <p>{this.props.repos}</p>
       </div>
     )
