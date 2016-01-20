@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import NotesList from './NotesList'
 
 export default class Notes extends Component {
   render () {
-    console.log('Notes: ', this.props.notes)
     return (
       <div>
         <h3>Notes for {this.props.username}</h3>
@@ -11,4 +10,9 @@ export default class Notes extends Component {
       </div>
     )
   }
+}
+
+Notes.propTypes = {
+  username: PropTypes.string.isRequired,
+  notes: PropTypes.array.isRequired
 }

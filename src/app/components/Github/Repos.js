@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 export default class Repos extends Component {
   render () {
@@ -9,4 +9,9 @@ export default class Repos extends Component {
       </div>
     )
   }
+}
+
+Repos.propTypes = {
+  username: PropTypes.string.isRequired,
+  repos: PropTypes.array.isRequired
 }

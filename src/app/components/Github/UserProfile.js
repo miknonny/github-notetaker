@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 export default class UserProfile extends Component {
   render () {
@@ -10,4 +10,9 @@ export default class UserProfile extends Component {
       </div>
     )
   }
+}
+
+UserProfile.propTypes = {
+  username: PropTypes.string.isRequired,
+  bio: PropTypes.object.isRequired
 }
