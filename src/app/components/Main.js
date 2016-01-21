@@ -6,7 +6,7 @@ export default class Main extends Component {
       <div className="main-container">
         <nav className="navbar navbar-default" role="navigation">
           <div className="col-sm-7 col-sm-offset-2" style={{marginTop: 15}}>
-            <SearchGithub />
+            <SearchGithub history={this.props.history}/>
           </div>
         </nav>
         <div className="container">
