@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SearchGithub } from './SearchGithub'
+import SearchGithub from './SearchGithub'
 export default class Main extends Component {
   render() {
     return (

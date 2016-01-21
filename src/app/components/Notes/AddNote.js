@@ -16,7 +16,7 @@ export default class AddNote extends Component {
         <span className="input-group-btn">
           <button className="btn btn-default"
             type="button"
-            onClick={this.handleSubmit.bind(this)}>
+            onClick={() => this.handleSubmit()}>
             Submit
           </button>
         </span>

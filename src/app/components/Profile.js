@@ -5,9 +5,9 @@ import UserProfile from './Github/UserProfile'
 import Notes from './Notes/Notes'
 import ReactFireMixin from 'reactfire'
 import Firebase from 'firebase'
-import { helpers } from '../utils/helpers'
+import getGithubInfo from '../utils/helpers'
 
-export const Profile = React.createClass({
+export default React.createClass({
   // Takes the 'this' keyword of your class. and adds a few reactfire methods on it.
   mixins: [ReactFireMixin],
   getInitialState () {
@@ -21,11 +21,25 @@ export const Profile = React.createClass({
   // This will be called right after the view is rendered.
   componentDidMount () {
     this.ref = new Firebase('https://gnotetaker.firebaseio.com/')
-    let childRef = this.ref.child(this.props.params.username)
+    this.init(this.props.params.username)
+  },
+  // This does something with the new Props we receive into our component.
+  componentWillReceiveProps (nextProps) {
+    this.unbind('notes');
+    this.init(nextProps.params.username)
+  },
+
+  // this will remove connection to firebase once component is not active.
+  componentWillUnmount () {
+    this.unbind('notes')
+  },
+
+  init (username) {
+    let childRef = this.ref.child(username)
     // this binds firebase to the notes array in state
     this.bindAsArray(childRef, 'notes')
 
-    helpers.getGithubInfo(this.props.params.username)
+    getGithubInfo(username)
       .then((data) => {
         // debugger
         this.setState({
@@ -33,11 +47,6 @@ export const Profile = React.createClass({
           repos: data.repos
         })
       })
-  },
-
-  // this will remove connection to firebase once component is not active.
-  componentWillUnmount () {
-    this.unbind('notes')
   },
 
   // manippulate that state where it leaves and pass down

@@ -1,18 +1,18 @@
 import React from 'react'
 import { History } from 'react-router'
 
-export const SearchGithub = React.createClass({
+export default React.createClass({
   mixins: [History],
   getRef (ref) {
     this.usernameRef = ref;
   },
   handleSubmit (e) {
-    e.preventDefault()
+    // e.preventDefault()
     let username = this.usernameRef.value
     this.usernameRef.value = ''
     // here react is adding the properties of history to our this instance.
     // history.pushState will transition us to /profile/username.
-    this.history.pushState(null, 'profile/' + username)
+    this.history.pushState(null, `/profile/${username}`)
   },
   render () {
     return (
