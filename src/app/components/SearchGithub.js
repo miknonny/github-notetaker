@@ -32,4 +32,3 @@ export default class SearchGithub extends Component{
 SearchGithub.propTypes = {
   history: PropTypes.object.isRequired
 }
-// mixins: [History],

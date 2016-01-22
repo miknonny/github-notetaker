@@ -1,62 +1,60 @@
-import React from 'react'
-import { Router } from 'react-router'
+import React, { Component } from 'react'
 import Repos from './Github/Repos'
 import UserProfile from './Github/UserProfile'
 import Notes from './Notes/Notes'
-import ReactFireMixin from 'reactfire'
-import Firebase from 'firebase'
 import getGithubInfo from '../utils/helpers'
+import Rebase from 're-base'
 
-export default React.createClass({
-  // Takes the 'this' keyword of your class. and adds a few reactfire methods on it.
-  mixins: [ReactFireMixin],
-  getInitialState () {
-    return {
-      notes: [1, 2, 3],
+const base = Rebase.createClass('https://gnotetaker.firebaseio.com/')
+export default class Profile extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      notes: [],
       bio: {},
       repos: []
     }
-  },
-
+  }
   // This will be called right after the view is rendered.
   componentDidMount () {
-    this.ref = new Firebase('https://gnotetaker.firebaseio.com/')
+    // creates or binds to firebase endpoint. db.firebase.com/username
     this.init(this.props.params.username)
-  },
+  }
   // This does something with the new Props we receive into our component.
   componentWillReceiveProps (nextProps) {
-    this.unbind('notes');
+    base.removeBinding(this.ref)
     this.init(nextProps.params.username)
-  },
+  }
 
   // this will remove connection to firebase once component is not active.
   componentWillUnmount () {
-    this.unbind('notes')
-  },
+    base.removeBinding(this.ref)
+  }
 
+  // Init handles are
   init (username) {
-    let childRef = this.ref.child(username)
-    // this binds firebase to the notes array in state
-    this.bindAsArray(childRef, 'notes')
+    // This allows you to bind a property on your state to firebase
+    // endpoint ${username}.
+    this.ref = base.bindToState(username, {
+      context: this,
+      asArray: true,
+      state: 'notes'
+    })
 
     getGithubInfo(username)
       .then((data) => {
-        // debugger
         this.setState({
           bio: data.bio,
           repos: data.repos
         })
       })
-  },
+  }
 
-  // manippulate that state where it leaves and pass down
-  // the function to the child compnent that requires it.
   handleAddNote (newNote) {
-
-    // firebaseapp/username/noOfItems/setItemhere
-    this.ref.child(this.props.params.username).child(this.state.notes.length)
-      .set(newNote)
-  },
+    base.post(this.props.params.username, {
+      data: [...this.state.notes, newNote]
+    })
+  }
 
   render () {
     return (
@@ -72,9 +70,9 @@ export default React.createClass({
         <div className="col-md-4">
           <Notes username={this.props.params.username}
             notes={this.state.notes}
-            addNote={this.handleAddNote} />
+            addNote={(newNote) => this.handleAddNote(newNote)} />
         </div>
       </div>
     )
   }
-})
+}
