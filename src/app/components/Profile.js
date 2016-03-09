@@ -51,6 +51,12 @@ export default class Profile extends Component {
   }
 
   handleAddNote (newNote) {
+    /**
+     * Base.post receives the endpoint that we want to post to and the data
+     * we trying to post.
+     * @param {string} endpoint on firebase
+     * @param {obj} data we wish to insert to the endpoint.
+     */
     base.post(this.props.params.username, {
       data: [...this.state.notes, newNote]
     })
